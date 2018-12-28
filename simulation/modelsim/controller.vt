@@ -1,0 +1,746 @@
+// Copyright (C) 2018  Intel Corporation. All rights reserved.
+// Your use of Intel Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Intel Program License 
+// Subscription Agreement, the Intel Quartus Prime License Agreement,
+// the Intel FPGA IP License Agreement, or other applicable license
+// agreement, including, without limitation, that your use is for
+// the sole purpose of programming logic devices manufactured by
+// Intel and sold by Intel or its authorized distributors.  Please
+// refer to the applicable agreement for further details.
+
+// *****************************************************************************
+// This file contains a Verilog test bench template that is freely editable to  
+// suit user's needs .Comments are provided in each section to help the user    
+// fill out necessary details.                                                  
+// *****************************************************************************
+// Generated on "12/27/2018 10:20:42"
+                                                                                
+// Verilog Test Bench template for design : controller
+// 
+// Simulation tool : ModelSim-Altera (Verilog)
+// 
+
+`define NOP 			18'b000000000_000000000
+`define STEP 			18'b100000000_000000001
+//8cycle instruction
+// state 1
+`define WRITE_DATA	18'b000000000_000000010
+// state 2
+`define READ_DATA 	18'b000000000_000000011
+
+//64cycle instruction
+// state 3
+`define WRITE_PARAM 	18'b000000000_000000100
+
+
+`timescale 1 ps/ 1 ps
+module controller_vlg_tst();
+// constants                                           
+// general purpose registers
+reg eachvec;
+// test vector input registers
+reg CLK;
+reg [17:0] treg_DATA_BUS;
+reg [17:0] IN_L0;
+reg [17:0] IN_L1;
+reg [17:0] IN_L2;
+reg [17:0] IN_L3;
+reg [17:0] IN_L4;
+reg [17:0] IN_L5;
+reg [17:0] IN_L6;
+reg [17:0] IN_L7;
+reg RST;
+// wires                                               
+wire CLK_O;
+wire [17:0]  DATA_BUS;
+wire [17:0]  O_L0;
+wire [17:0]  O_L1;
+wire [17:0]  O_L2;
+wire [17:0]  O_L3;
+wire [17:0]  O_L4;
+wire [17:0]  O_L5;
+wire [17:0]  O_L6;
+wire [17:0]  O_L7;
+wire SHORT_CUT;
+wire WE;
+
+// assign statements (if any)                          
+assign DATA_BUS = treg_DATA_BUS;
+controller i1 (
+// port map - connection between master ports and signals/registers   
+	.CLK(CLK),
+	.CLK_O(CLK_O),
+	.DATA_BUS(DATA_BUS),
+	.IN_L0(IN_L0),
+	.IN_L1(IN_L1),
+	.IN_L2(IN_L2),
+	.IN_L3(IN_L3),
+	.IN_L4(IN_L4),
+	.IN_L5(IN_L5),
+	.IN_L6(IN_L6),
+	.IN_L7(IN_L7),
+	.O_L0(O_L0),
+	.O_L1(O_L1),
+	.O_L2(O_L2),
+	.O_L3(O_L3),
+	.O_L4(O_L4),
+	.O_L5(O_L5),
+	.O_L6(O_L6),
+	.O_L7(O_L7),
+	.RST(RST),
+	.SHORT_CUT(SHORT_CUT),
+	.WE(WE)
+);
+initial                                                
+begin                                                  
+// code that executes only once                        
+// insert code here --> begin                          
+                                                       
+// --> end                                             
+$display("Running testbench");       
+
+//cycle 0
+IN_L0 <= 18'b000000000_000000001;
+IN_L1 <= 18'b000000000_000000010;
+IN_L2 <= 18'b000000000_000000011;
+IN_L3 <= 18'b000000000_000000100;
+IN_L4 <= 18'b000000000_000000101;
+IN_L5 <= 18'b000000000_000000110;
+IN_L6 <= 18'b000000000_000000111;
+IN_L7 <= 18'b000000000_000001000;
+
+CLK <= 0;
+RST <= 0;
+#5      
+CLK <= 1;
+#5
+
+//cycle 1
+CLK <= 0;
+RST <= 1;
+treg_DATA_BUS <= `WRITE_DATA;
+#5      
+CLK <= 1;
+#5
+
+//cycle 2
+CLK <= 0;
+treg_DATA_BUS <= 18'b000000001_000000000;
+#5      
+CLK <= 1;
+#5
+
+//cycle 3
+CLK <= 0;
+treg_DATA_BUS <= 18'b000000010_000000000;
+#5      
+CLK <= 1;
+#5
+
+//cycle 4
+CLK <= 0;
+treg_DATA_BUS <= 18'b000000011_000000000;
+#5     
+CLK <= 1;
+#5
+
+//cycle 5
+CLK <= 0;
+treg_DATA_BUS <= 18'b000000100_000000000;
+#5      
+CLK <= 1;
+#5
+
+//cycle 6
+CLK <= 0;
+treg_DATA_BUS <= 18'b000000101_000000000;
+#5      
+CLK <= 1;
+#5
+
+//cycle 7
+CLK <= 0;
+treg_DATA_BUS <= 18'b000000110_000000000;
+#5      
+CLK <= 1;
+#5
+
+//cycle 8
+CLK <= 0;
+treg_DATA_BUS <= 18'b000000111_000000000;
+#5      
+CLK <= 1;
+#5
+
+//cycle 9
+CLK <= 0;
+treg_DATA_BUS <= 18'b000001000_000000000;
+#5      
+CLK <= 1;       
+#5
+
+
+//read instruction
+//cycle 10
+CLK <= 0;
+treg_DATA_BUS <= `READ_DATA;
+#5      
+CLK <= 1;  
+#5
+
+//cycle 11
+CLK <= 0;
+treg_DATA_BUS <= 18'bz;
+#5      
+CLK <= 1;  
+#5
+
+//cycle 12
+CLK <= 0;
+#5      
+CLK <= 1;  
+#5
+
+//cycle 13
+CLK <= 0;
+#5      
+CLK <= 1;  
+#5
+
+
+//cycle 14
+CLK <= 0;
+#5      
+CLK <= 1;  
+#5
+
+
+//cycle 15
+CLK <= 0;
+#5      
+CLK <= 1;  
+#5
+
+
+//cycle 16
+CLK <= 0;
+#5      
+CLK <= 1;  
+#5
+
+
+//cycle 17
+CLK <= 0;
+#5      
+CLK <= 1;  
+#5
+
+//cycle 18
+CLK <= 0;
+#5      
+CLK <= 1;  
+#5
+
+//cycle 19
+CLK <= 0;
+#5      
+CLK <= 1;  
+#5
+
+//cycle 0
+CLK <= 0;
+RST <= 1;
+treg_DATA_BUS <= `WRITE_PARAM;
+#5      
+CLK <= 1;
+#5
+
+//cycle 1
+CLK <= 0;
+treg_DATA_BUS <= 1;
+#5      
+CLK <= 1;
+#5
+
+//cycle 2
+CLK <= 0;
+treg_DATA_BUS <= 2;
+#5      
+CLK <= 1;
+#5
+
+//cycle 3
+CLK <= 0;
+treg_DATA_BUS <= 3;
+#5     
+CLK <= 1;
+#5
+
+//cycle 4
+CLK <= 0;
+treg_DATA_BUS <= 4;
+#5      
+CLK <= 1;
+#5
+
+//cycle 5
+CLK <= 0;
+treg_DATA_BUS <= 5;
+#5      
+CLK <= 1;
+#5
+
+//cycle 6
+CLK <= 0;
+treg_DATA_BUS <= 6;
+#5      
+CLK <= 1;
+#5
+
+//cycle 7
+CLK <= 0;
+treg_DATA_BUS <= 7;
+#5      
+CLK <= 1;
+#5
+
+//cycle 8
+CLK <= 0;
+treg_DATA_BUS <= 8;
+#5      
+CLK <= 1;       
+#5
+
+
+//cycle 1
+CLK <= 0;
+treg_DATA_BUS <= 9;
+#5      
+CLK <= 1;
+#5
+
+//cycle 2
+CLK <= 0;
+treg_DATA_BUS <= 10;
+#5      
+CLK <= 1;
+#5
+
+//cycle 3
+CLK <= 0;
+treg_DATA_BUS <= 11;
+#5     
+CLK <= 1;
+#5
+
+//cycle 4
+CLK <= 0;
+treg_DATA_BUS <= 12;
+#5      
+CLK <= 1;
+#5
+
+//cycle 5
+CLK <= 0;
+treg_DATA_BUS <= 13;
+#5      
+CLK <= 1;
+#5
+
+//cycle 6
+CLK <= 0;
+treg_DATA_BUS <= 14;
+#5      
+CLK <= 1;
+#5
+
+//cycle 7
+CLK <= 0;
+treg_DATA_BUS <= 15;
+#5      
+CLK <= 1;
+#5
+
+//cycle 8
+CLK <= 0;
+treg_DATA_BUS <= 16;
+#5      
+CLK <= 1;       
+#5
+
+
+//cycle 1
+CLK <= 0;
+treg_DATA_BUS <= 17;
+#5      
+CLK <= 1;
+#5
+
+//cycle 2
+CLK <= 0;
+treg_DATA_BUS <= 18;
+#5      
+CLK <= 1;
+#5
+
+//cycle 3
+CLK <= 0;
+treg_DATA_BUS <= 19;
+#5     
+CLK <= 1;
+#5
+
+//cycle 4
+CLK <= 0;
+treg_DATA_BUS <= 20;
+#5      
+CLK <= 1;
+#5
+
+//cycle 5
+CLK <= 0;
+treg_DATA_BUS <= 21;
+#5      
+CLK <= 1;
+#5
+
+//cycle 6
+CLK <= 0;
+treg_DATA_BUS <= 22;
+#5      
+CLK <= 1;
+#5
+
+//cycle 7
+CLK <= 0;
+treg_DATA_BUS <= 23;
+#5      
+CLK <= 1;
+#5
+
+//cycle 8
+CLK <= 0;
+treg_DATA_BUS <= 24;
+#5      
+CLK <= 1;       
+#5
+
+
+//cycle 1
+CLK <= 0;
+treg_DATA_BUS <= 25;
+#5      
+CLK <= 1;
+#5
+
+//cycle 2
+CLK <= 0;
+treg_DATA_BUS <= 26;
+#5      
+CLK <= 1;
+#5
+
+//cycle 3
+CLK <= 0;
+treg_DATA_BUS <= 27;
+#5     
+CLK <= 1;
+#5
+
+//cycle 4
+CLK <= 0;
+treg_DATA_BUS <= 28;
+#5      
+CLK <= 1;
+#5
+
+//cycle 5
+CLK <= 0;
+treg_DATA_BUS <= 29;
+#5      
+CLK <= 1;
+#5
+
+//cycle 6
+CLK <= 0;
+treg_DATA_BUS <= 30;
+#5      
+CLK <= 1;
+#5
+
+//cycle 7
+CLK <= 0;
+treg_DATA_BUS <= 31;
+#5      
+CLK <= 1;
+#5
+
+//cycle 8
+CLK <= 0;
+treg_DATA_BUS <= 32;
+#5      
+CLK <= 1;       
+#5
+
+//cycle 1
+CLK <= 0;
+treg_DATA_BUS <= 33;
+#5      
+CLK <= 1;
+#5
+
+//cycle 2
+CLK <= 0;
+treg_DATA_BUS <= 34;
+#5      
+CLK <= 1;
+#5
+
+//cycle 3
+CLK <= 0;
+treg_DATA_BUS <= 35;
+#5     
+CLK <= 1;
+#5
+
+//cycle 4
+CLK <= 0;
+treg_DATA_BUS <= 36;
+#5      
+CLK <= 1;
+#5
+
+//cycle 5
+CLK <= 0;
+treg_DATA_BUS <= 37;
+#5      
+CLK <= 1;
+#5
+
+//cycle 6
+CLK <= 0;
+treg_DATA_BUS <= 38;
+#5      
+CLK <= 1;
+#5
+
+//cycle 7
+CLK <= 0;
+treg_DATA_BUS <= 39;
+#5      
+CLK <= 1;
+#5
+
+//cycle 8
+CLK <= 0;
+treg_DATA_BUS <= 40;
+#5      
+CLK <= 1;       
+#5
+
+
+//cycle 1
+CLK <= 0;
+treg_DATA_BUS <= 41;
+#5      
+CLK <= 1;
+#5
+
+//cycle 2
+CLK <= 0;
+treg_DATA_BUS <= 42;
+#5      
+CLK <= 1;
+#5
+
+//cycle 3
+CLK <= 0;
+treg_DATA_BUS <= 43;
+#5     
+CLK <= 1;
+#5
+
+//cycle 4
+CLK <= 0;
+treg_DATA_BUS <= 44;
+#5      
+CLK <= 1;
+#5
+
+//cycle 5
+CLK <= 0;
+treg_DATA_BUS <= 45;
+#5      
+CLK <= 1;
+#5
+
+//cycle 6
+CLK <= 0;
+treg_DATA_BUS <= 46;
+#5      
+CLK <= 1;
+#5
+
+//cycle 7
+CLK <= 0;
+treg_DATA_BUS <= 47;
+#5      
+CLK <= 1;
+#5
+
+//cycle 8
+CLK <= 0;
+treg_DATA_BUS <= 48;
+#5      
+CLK <= 1;       
+#5
+
+
+//cycle 1
+CLK <= 0;
+treg_DATA_BUS <= 49;
+#5      
+CLK <= 1;
+#5
+
+//cycle 2
+CLK <= 0;
+treg_DATA_BUS <= 50;
+#5      
+CLK <= 1;
+#5
+
+//cycle 3
+CLK <= 0;
+treg_DATA_BUS <= 51;
+#5     
+CLK <= 1;
+#5
+
+//cycle 4
+CLK <= 0;
+treg_DATA_BUS <= 52;
+#5      
+CLK <= 1;
+#5
+
+//cycle 5
+CLK <= 0;
+treg_DATA_BUS <= 53;
+#5      
+CLK <= 1;
+#5
+
+//cycle 6
+CLK <= 0;
+treg_DATA_BUS <= 54;
+#5      
+CLK <= 1;
+#5
+
+//cycle 7
+CLK <= 0;
+treg_DATA_BUS <= 55;
+#5      
+CLK <= 1;
+#5
+
+//cycle 8
+CLK <= 0;
+treg_DATA_BUS <= 56;
+#5      
+CLK <= 1;       
+#5
+
+
+//cycle 1
+CLK <= 0;
+treg_DATA_BUS <= 57;
+#5      
+CLK <= 1;
+#5
+
+//cycle 2
+CLK <= 0;
+treg_DATA_BUS <= 58;
+#5      
+CLK <= 1;
+#5
+
+//cycle 3
+CLK <= 0;
+treg_DATA_BUS <= 59;
+#5     
+CLK <= 1;
+#5
+
+//cycle 4
+CLK <= 0;
+treg_DATA_BUS <= 60;
+#5      
+CLK <= 1;
+#5
+
+//cycle 5
+CLK <= 0;
+treg_DATA_BUS <= 61;
+#5      
+CLK <= 1;
+#5
+
+//cycle 6
+CLK <= 0;
+treg_DATA_BUS <= 62;
+#5      
+CLK <= 1;
+#5
+
+//cycle 7
+CLK <= 0;
+treg_DATA_BUS <= 63;
+#5      
+CLK <= 1;
+#5
+
+//cycle 8
+CLK <= 0;
+treg_DATA_BUS <= 64;
+#5      
+CLK <= 1;       
+#5
+
+//cycle 8
+CLK <= 0;
+#5      
+CLK <= 1;       
+#5
+
+//cycle 8
+CLK <= 0;
+#5      
+CLK <= 1;       
+#5
+
+//cycle 8
+CLK <= 0;
+#5      
+CLK <= 1;       
+
+
+end                                                    
+always                                                 
+// optional sensitivity list                           
+// @(event1 or event2 or .... eventn)                  
+begin                                                  
+// code executes for every event on sensitivity list   
+// insert code here --> begin                          
+                                                       
+@eachvec;                                              
+// --> end                                             
+end                                                    
+endmodule
+

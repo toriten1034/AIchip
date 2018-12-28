@@ -1,0 +1,1663 @@
+// Copyright (C) 2018  Intel Corporation. All rights reserved.
+// Your use of Intel Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Intel Program License 
+// Subscription Agreement, the Intel Quartus Prime License Agreement,
+// the Intel FPGA IP License Agreement, or other applicable license
+// agreement, including, without limitation, that your use is for
+// the sole purpose of programming logic devices manufactured by
+// Intel and sold by Intel or its authorized distributors.  Please
+// refer to the applicable agreement for further details.
+
+// *****************************************************************************
+// This file contains a Verilog test bench template that is freely editable to  
+// suit user's needs .Comments are provided in each section to help the user    
+// fill out necessary details.                                                  
+// *****************************************************************************
+// Generated on "12/09/2018 11:49:52"
+                                                                                
+// Verilog Test Bench template for design : DE0_CV_golden_top
+// 
+// Simulation tool : ModelSim-Altera (Verilog)
+
+`define NOP 			18'b000000000_000000000
+`define STEP 			18'b000000000_000000001
+//8cycle instruction
+// state 1
+`define WRITE_DATA	18'b000000000_000000010
+// state 2
+`define READ_DATA 	18'b000000000_000000011
+
+//64cycle instruction
+// state 3
+`define WRITE_PARAM 	18'b000000000_000000100
+// 
+
+`timescale 1 ps/ 1 ps
+module DE0_CV_golden_top_vlg_tst();
+// constants                                           
+// general purpose registers
+reg eachvec;
+// test vector input registers
+reg CLOCK2_50;
+reg CLOCK3_50;
+reg treg_CLOCK4_50;
+reg CLOCK_50;
+reg [15:0] treg_DRAM_DQ;
+reg [35:0] treg_GPIO_0;
+reg [35:0] treg_GPIO_1;
+reg [3:0] KEY;
+reg treg_PS2_CLK;
+reg treg_PS2_CLK2;
+reg treg_PS2_DAT;
+reg treg_PS2_DAT2;
+reg RESET_N;
+reg treg_SD_CMD;
+reg [3:0] treg_SD_DATA;
+reg [9:0] SW;
+// wires                                               
+wire CLOCK4_50;
+wire [12:0]  DRAM_ADDR;
+wire [1:0]  DRAM_BA;
+wire DRAM_CAS_N;
+wire DRAM_CKE;
+wire DRAM_CLK;
+wire DRAM_CS_N;
+wire [15:0]  DRAM_DQ;
+wire DRAM_LDQM;
+wire DRAM_RAS_N;
+wire DRAM_UDQM;
+wire DRAM_WE_N;
+wire [35:0]  GPIO_0;
+wire [35:0]  GPIO_1;
+wire [6:0]  HEX0;
+wire [6:0]  HEX1;
+wire [6:0]  HEX2;
+wire [6:0]  HEX3;
+wire [6:0]  HEX4;
+wire [6:0]  HEX5;
+wire [9:0]  LEDR;
+wire PS2_CLK;
+wire PS2_CLK2;
+wire PS2_DAT;
+wire PS2_DAT2;
+wire SD_CLK;
+wire SD_CMD;
+wire [3:0]  SD_DATA;
+wire [3:0]  VGA_B;
+wire [3:0]  VGA_G;
+wire VGA_HS;
+wire [3:0]  VGA_R;
+wire VGA_VS;
+
+// assign statements (if any)                          
+assign CLOCK4_50 = treg_CLOCK4_50;
+assign DRAM_DQ = treg_DRAM_DQ;
+assign GPIO_0 = treg_GPIO_0;
+//assign GPIO_1 = treg_GPIO_1;
+assign PS2_CLK = treg_PS2_CLK;
+assign PS2_CLK2 = treg_PS2_CLK2;
+assign PS2_DAT = treg_PS2_DAT;
+assign PS2_DAT2 = treg_PS2_DAT2;
+assign SD_CMD = treg_SD_CMD;
+assign SD_DATA = treg_SD_DATA;
+
+//debugs
+reg RST;
+reg CLK;
+reg [17:0]DATA_BUS;
+
+assign GPIO_1[17:0] 	= DATA_BUS;
+assign GPIO_1[18] 	= CLK;
+assign GPIO_1[19] 	= RST;
+
+
+DE0_CV_golden_top i1 (
+// port map - connection between master ports and signals/registers   
+	.CLOCK2_50(CLOCK2_50),
+	.CLOCK3_50(CLOCK3_50),
+	.CLOCK4_50(CLOCK4_50),
+	.CLOCK_50(CLOCK_50),
+	.DRAM_ADDR(DRAM_ADDR),
+	.DRAM_BA(DRAM_BA),
+	.DRAM_CAS_N(DRAM_CAS_N),
+	.DRAM_CKE(DRAM_CKE),
+	.DRAM_CLK(DRAM_CLK),
+	.DRAM_CS_N(DRAM_CS_N),
+	.DRAM_DQ(DRAM_DQ),
+	.DRAM_LDQM(DRAM_LDQM),
+	.DRAM_RAS_N(DRAM_RAS_N),
+	.DRAM_UDQM(DRAM_UDQM),
+	.DRAM_WE_N(DRAM_WE_N),
+	.GPIO_0(GPIO_0),
+	.GPIO_1(GPIO_1),
+	.HEX0(HEX0),
+	.HEX1(HEX1),
+	.HEX2(HEX2),
+	.HEX3(HEX3),
+	.HEX4(HEX4),
+	.HEX5(HEX5),
+	.KEY(KEY),
+	.LEDR(LEDR),
+	.PS2_CLK(PS2_CLK),
+	.PS2_CLK2(PS2_CLK2),
+	.PS2_DAT(PS2_DAT),
+	.PS2_DAT2(PS2_DAT2),
+	.RESET_N(RESET_N),
+	.SD_CLK(SD_CLK),
+	.SD_CMD(SD_CMD),
+	.SD_DATA(SD_DATA),
+	.SW(SW),
+	.VGA_B(VGA_B),
+	.VGA_G(VGA_G),
+	.VGA_HS(VGA_HS),
+	.VGA_R(VGA_R),
+	.VGA_VS(VGA_VS)
+);
+initial                                                
+begin                                                  
+// code that executes only once                        
+// insert code here --> begin                          
+                                                       
+// --> end                                             
+$display("Running testbench");    
+
+//cycle 0;
+RST <= 0;
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+CLK <= 0;
+RST <= 1;
+DATA_BUS <= `WRITE_PARAM;
+#5
+CLK <= 1;
+#5
+
+//Level 1
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b000000001_000000000;
+#5
+CLK <= 1;
+#5
+
+//Level 2
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b000000001_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//Level 2
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b000000001_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//Level 3
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b000000001_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//Level 4
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b000000001_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b000000001_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b000000001_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b000000001_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle
+CLK <= 0;
+DATA_BUS <= `WRITE_DATA;
+#5
+CLK <= 1;
+#5
+
+//cycl1
+CLK <= 0;
+DATA_BUS <= 18'b000000001_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl2
+CLK <= 0;
+DATA_BUS <= 18'b000000010_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl3
+CLK <= 0;
+DATA_BUS <= 18'b000000011_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl4
+CLK <= 0;
+DATA_BUS <= 18'b000000100_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl5
+CLK <= 0;
+DATA_BUS <= 18'b000000101_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl6
+CLK <= 0;
+DATA_BUS <= 18'b000000110_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl7
+CLK <= 0;
+DATA_BUS <= 18'b000000111_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl7
+CLK <= 0;
+DATA_BUS <= 18'b000001000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl1
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycl2
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycl3
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycl4
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycl5
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycl6
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle7
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle9
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle10
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle1
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle12
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle13
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle14
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle15
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle16
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//read data
+CLK <= 0;
+DATA_BUS <= `READ_DATA;
+#5
+CLK <= 1;
+#5
+
+//cycle 1
+CLK <= 0;
+DATA_BUS <= 18'bz;
+#5
+CLK <= 1;
+#5
+
+//cycle 2
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle 3
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle 4
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle 5
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle 6
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle 7
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle 8
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle 9
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+/************************************
+minus try
+************************************/
+CLK <= 0;
+DATA_BUS <= `WRITE_PARAM;
+#5
+CLK <= 1;
+#5
+
+//Level 1
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b111111111_000000000;
+#5
+CLK <= 1;
+#5
+
+//Level 2
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b111111111_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//Level 2
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b111111111_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//Level 3
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b111111111_000000000;
+
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//Level 4
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b111111111_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b111111111_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b111111111_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cylce1
+CLK <= 0;
+DATA_BUS <= 18'b111111111_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle2
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce3
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle4
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce5
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle6
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+
+//cylce7
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= 18'b000000000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycle
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle
+CLK <= 0;
+DATA_BUS <= `WRITE_DATA;
+#5
+CLK <= 1;
+#5
+
+//cycl1
+CLK <= 0;
+DATA_BUS <= 18'b000000001_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl2
+CLK <= 0;
+DATA_BUS <= 18'b000000010_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl3
+CLK <= 0;
+DATA_BUS <= 18'b000000011_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl4
+CLK <= 0;
+DATA_BUS <= 18'b000000100_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl5
+CLK <= 0;
+DATA_BUS <= 18'b000000101_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl6
+CLK <= 0;
+DATA_BUS <= 18'b000000110_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl7
+CLK <= 0;
+DATA_BUS <= 18'b000000111_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl7
+CLK <= 0;
+DATA_BUS <= 18'b000001000_000000000;
+#5
+CLK <= 1;
+#5
+
+//cycl1
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycl2
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycl3
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycl4
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycl5
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycl6
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle7
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+
+//cycle8
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle9
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle10
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle1
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle12
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle13
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle14
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle15
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//cycle16
+CLK <= 0;
+DATA_BUS <= `STEP;
+#5
+CLK <= 1;
+#5
+
+//read data
+CLK <= 0;
+DATA_BUS <= `READ_DATA;
+#5
+CLK <= 1;
+#5
+
+//cycle 1
+CLK <= 0;
+DATA_BUS <= 18'bz;
+#5
+CLK <= 1;
+#5
+
+//cycle 2
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle 3
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle 4
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle 5
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle 6
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle 7
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle 8
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+//cycle 9
+CLK <= 0;
+#5
+CLK <= 1;
+#5
+
+
+$display("stop testbench");    
+                   
+end                                                    
+always                                                 
+// optional sensitivity list                           
+// @(event1 or event2 or .... eventn)                  
+begin                                                  
+// code executes for every event on sensitivity list   
+// insert code here --> begin                          
+                                                       
+@eachvec;                                              
+// --> end                                             
+end                                                    
+endmodule
+
